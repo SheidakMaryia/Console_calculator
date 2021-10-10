@@ -7,13 +7,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class Calculator {
     private Calculation calculation;
-    private Console console;
+    private ConsoleReader consoleReader;
     private boolean isContinue;
 
     @Autowired
-    public Calculator(Calculation calculation, Console console) {
+    public Calculator(Calculation calculation, ConsoleReader consoleReader) {
         this.calculation = calculation;
-        this.console = console;
+        this.consoleReader = consoleReader;
     }
 
     public Calculator() {}
@@ -26,27 +26,29 @@ public class Calculator {
         this.calculation = calculation;
     }
 
-    public Console getConsole() {
-        return console;
+    public ConsoleReader getConsole() {
+        return consoleReader;
     }
 
-    public void setConsole(Console console) {
-        this.console = console;
+    public void setConsole(ConsoleReader consoleReader) {
+        this.consoleReader = consoleReader;
     }
 
 
     public void run(){
         do {
-            System.out.println("Choose type of operation");
+
+            ConsoleWriter.consoleWriter(ConsoleWriter.CHOOSE_OPERATION);
             showMenu1();
-            int yourChoice = console.getInt();
+            int yourChoice = consoleReader.getInt();
 
-            System.out.println("Enter num1: ");
-            double num1 = console.getDouble();
-            System.out.println("Enter num2: ");
-            double num2 = console.getDouble();
+            ConsoleWriter.consoleWriter(ConsoleWriter.NUM1);
+            double num1 = consoleReader.getDouble();
+            ConsoleWriter.consoleWriter(ConsoleWriter.NUM2);
+            double num2 = consoleReader.getDouble();
 
-            System.out.println("Result: " + calculation.getResult(num1, num2, yourChoice));
+            ConsoleWriter.consoleWriter(ConsoleWriter.RESULT);
+            System.out.println(calculation.getResult(num1, num2, yourChoice));//???
 
             continueOrNot();
         }while(isContinue);
@@ -54,23 +56,24 @@ public class Calculator {
 
     private void continueOrNot(){
         isContinue = true;
-        System.out.println("Do you want to continue?");
+        ConsoleWriter.consoleWriter(ConsoleWriter.CONTINUE);
         showMenu2();
-        int decision = console.getInt();
+        int decision = consoleReader.getInt();
         if (decision == 2){
             isContinue = false;
         }
     }
 
     private void showMenu1(){
-        System.out.println("addition - 1");
-        System.out.println("subtraction - 2");
-        System.out.println("multiplication - 3");
-        System.out.println("division - 4");
+        ConsoleWriter.consoleWriter(ConsoleWriter.ADDITION);
+        ConsoleWriter.consoleWriter(ConsoleWriter.SUBTRACTION);
+        ConsoleWriter.consoleWriter(ConsoleWriter.SUBTRACTION);
+        ConsoleWriter.consoleWriter(ConsoleWriter.DIVISION);
     }
 
     private void showMenu2(){
-        System.out.println("Yes - 1");
-        System.out.println("No - 2");
+        ConsoleWriter.consoleWriter(ConsoleWriter.YES);
+        ConsoleWriter.consoleWriter(ConsoleWriter.NO);
     }
+
 }

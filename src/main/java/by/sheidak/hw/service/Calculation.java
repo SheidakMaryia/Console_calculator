@@ -12,24 +12,7 @@ import java.util.Map;
 @Component
 public class Calculation {
 
-    //private MathOperation mathOperation;
-
     static double result = 0;
-//
-//    @Autowired
-//    public Calculation(MathOperation mathOperation) {
-//        this.mathOperation = mathOperation;
-//    }
-//
-//    public Calculation() {}
-//
-//    public MathOperation getMathOperation() {
-//        return mathOperation;
-//    }
-//
-//    public void setMathOperation(MathOperation mathOperation) {
-//        this.mathOperation = mathOperation;
-//    }
 
     public double getResult(double num1, double num2, int typeOfOperation){
         if (MapOperations.MAP_OPERATION.containsKey(typeOfOperation)){
